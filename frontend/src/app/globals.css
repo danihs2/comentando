@@ -162,10 +162,8 @@ header {
   
   /* FOOTER */
 footer {
-    padding: 20px;
     text-align: center;
     color: var(--dark);
-    margin: 10px;
 }
   
   /* MEDIA QUERIES */
