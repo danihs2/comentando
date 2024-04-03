@@ -1,6 +1,10 @@
+import Link from "next/link";
+
 function LoginButton({ isAuthenticated }) {
   return (
-    <button>{isAuthenticated ? 'Log Out' : 'Log In'}</button>
+    <Link href={isAuthenticated ? "/logout" : "/access"}>
+      <button>{isAuthenticated ? "Logout" : "Login"}</button>
+    </Link>
   );
 }
 
