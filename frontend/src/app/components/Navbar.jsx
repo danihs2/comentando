@@ -7,7 +7,7 @@ function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <header>
+    <header >
       <div className="netflixLogo">
         <Link href="/">
           <img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image" />
