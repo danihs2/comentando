@@ -1,0 +1,60 @@
+La BD
+Las tablas seran
+Usuario:
+-id
+-username
+-email
+-password
+
+Pelicula:
+-id
+-tmdb_id
+-score
+
+Comentario:
+-id
+-id_usuario (fk a usuario)
+-tmdb_id (fk a pelicula)
+-contenido
+-score
+
+Replie
+-id
+-id_usurio (fk a usuario)
+-id_comentario (fk a comentario)
+-contenido
+
+Los datos se van a ir llenando de la siguiente manera
+Usuario cuando alguien se registre, se va a poder consultar a los usuarios para hacer una validacion y dar un jwt
+La tabla se va ir llenando cuando alguien haga comentario por primera vez a la pelicula, es decir,
+si la pelicula no tiene comentarios entonces no va a existir en nuestra bd, cuando se haga un comentario ya se
+registraria la pelicula
+Los comentarios se registraran cuando alguien haga comentario a la pelicula y se podran consultar de acuerdo 
+a tmdb_id ya que es el id de la pelicula 
+Los replies son solo replies de comentarios, se van a registrar cuando alguien haga replie a un comentario y
+se podra consultar dando id del comentario
+Es importante destacar que los responses van a darse en JSon
+
+Lista de pasos generales que podrías seguir para completar tu API REST con Django:
+
+1.- Definir los modelos de datos: Diseña tus modelos de datos de acuerdo con la estructura de tu aplicación. Esto incluye las tablas de la base de datos y sus relaciones.
+
+2.- Crear las migraciones: Utiliza Django's migration framework para traducir tus modelos de datos en esquemas de base de datos.
+
+3.- Aplicar las migraciones: Ejecuta las migraciones para crear las tablas y estructuras de base de datos correspondientes.
+
+4.- Definir las vistas de la API: Crea vistas utilizando Django REST Framework que definan cómo se manejarán las solicitudes HTTP. Esto incluye la lógica para crear, leer, actualizar y eliminar (CRUD) recursos.
+
+5.- Serializar los datos: Define serializadores en Django REST Framework para convertir los objetos de tu modelo en JSON u otros formatos de respuesta HTTP.
+
+6.- Configurar las URLs: Configura las URLs de tu API para que correspondan con las vistas que has definido.
+
+7.- Implementar la autenticación y autorización: Si es necesario, agrega autenticación y autorización a tu API para proteger tus recursos.
+
+8.- Probar la API: Utiliza herramientas como Postman o curl para probar tus puntos finales de API y asegurarte de que funcionen correctamente.
+
+9.- Documentar la API: Escriba documentación para tu API que describa cómo usarla y qué endpoints están disponibles.
+
+10.- Refactorizar y optimizar: Una vez que tu API esté funcionando, refactoriza y optimiza tu código según sea necesario para mejorar el rendimiento y la mantenibilidad.
+
+Estos son los pasos generales que seguirías para completar tu API REST con Django.
