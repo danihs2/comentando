@@ -1,3 +1,14 @@
+Endpoints
+POST {
+    "username": "DanielG",
+    "email": "elotrodani@gmail.com",
+    "password": "contraseña"
+}
+http://localhost:8000/api/users/
+
+DELETE http://localhost:8000/api/users/2/
+
+
 La BD
 Las tablas seran
 Usuario:

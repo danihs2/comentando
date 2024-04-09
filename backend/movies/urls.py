@@ -1,11 +1,15 @@
-from django.urls import path
-from rest_framework.routers import DefaultRouter
-from .views import PeliculaViewSet, ComentarioViewSet, ReplieViewSet, UserViewSet
+from django.urls import path, include
+from rest_framework import routers
+from .views import PeliculaViewSet, ComentarioViewSet, ReplieViewSet, UserViewSet, login_view
 
-router = DefaultRouter()
+router = routers.DefaultRouter()
 router.register(r'peliculas', PeliculaViewSet)
 router.register(r'comentarios', ComentarioViewSet)
 router.register(r'replies', ReplieViewSet)
 router.register(r'users', UserViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('', include(router.urls)),
+    path('login/', login_view, name='login'),
+]
+
