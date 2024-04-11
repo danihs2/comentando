@@ -17,13 +17,26 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
+        # Autenticar al usuario utilizando Django's authenticate
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
-            return JsonResponse({'id': user.id})
+            # Si el usuario es autenticado correctamente, devuelve el ID del usuario
+            return JsonResponse({'id': user.id, 'username': user.username, 'email': user.email})
         else:
-            return JsonResponse({'error': 'Credenciales inválidas'}, status=400)
+            # Si las credenciales son inválidas, devuelve un mensaje de error y retorna que fue lo que falló
+            if User.objects.filter(username=username).exists():
+                mensaje = 'Credenciales inválidas, contraseña incorrecta'
+            else:
+                username_display = username if username is not None else 'None'
+                password_display = password if password is not None else 'None'
+                mensaje = f'Credenciales inválidas, usuario no existe'
+            return JsonResponse({'error': mensaje}, status=status.HTTP_401_UNAUTHORIZED)
+            
     else:
-        return JsonResponse({'error': 'Método no permitido'}, status=405)
+        # Si el método de solicitud no es POST, devuelve un mensaje de error
+        return JsonResponse({'error': 'Método no permitido'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class PeliculaViewSet(viewsets.ModelViewSet):
