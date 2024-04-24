@@ -1,15 +1,15 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
+from . import views
 from rest_framework import routers
-from .views import PeliculaViewSet, ComentarioViewSet, ReplieViewSet, UserViewSet, login_view
 
 router = routers.DefaultRouter()
-router.register(r'peliculas', PeliculaViewSet)
-router.register(r'comentarios', ComentarioViewSet)
-router.register(r'replies', ReplieViewSet)
-router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/', login_view, name='login'),
+    re_path('login', views.login),
+    re_path('register', views.register),
+    re_path('profile', views.profile),
+    re_path('comentario', views.comentario),
+    re_path(r'pelicula/(?P<tmdb_id>\d+)/', views.detalles_pelicula),
 ]
 
