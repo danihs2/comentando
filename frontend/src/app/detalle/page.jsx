@@ -4,24 +4,46 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import CommentSection from '../components/CommentSection';
 import MyCommentSection from '../components/MyCommentSection';
 
+async function getComments(movieId) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_OUR_API_URL}/api/pelicula/${movieId}/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  return data;
+}
  
 const detallep = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [movieData, setMovieData] = useState({})
+  const [ourMovieData, setOurMovieData] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [comentarios, setComentarios] = useState(null);
 
   useEffect(() => {
     const url = `${pathname}?${searchParams}`
     // expected output: "/detalle?movieId=1"
     var movieId = searchParams.get('movieId')
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=es-MX`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=es-MX`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      //console.log(data)
       data.img = `https://image.tmdb.org/t/p/original${data.backdrop_path}`
       setMovieData(data)
     });
+    const fetchData = async () => {
+      const data = await getComments(movieId);
+      setComentarios(data);
+      setLoading(false);
+    };
+
+    fetchData();
+    
   }, [pathname, searchParams])
+
   return (
     <>
       <section className="relative flex items-center justify-center h-screen">
@@ -83,7 +105,11 @@ const detallep = () => {
         </div>
       </div>
       <div className="px-10 pb-10">
-        <CommentSection />
+        {loading ? <p>Cargando comentarios...</p> : 
+          <>
+            <CommentSection comentarios={comentarios.comentarios} />
+          </> 
+        }
       </div>
     </>
   );

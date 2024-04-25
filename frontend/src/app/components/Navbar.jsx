@@ -10,7 +10,7 @@ function Navbar() {
     <header >
       <div className="netflixLogo">
         <Link href="/">
-          <img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image" />
+          <img src="https://github.com/danihs2/comentando/blob/main/frontend/public/RESEFLIX-13-4-2024.png?raw=true" alt="Logo Image" />
         </Link>
       </div>
       <nav className="main-nav">
