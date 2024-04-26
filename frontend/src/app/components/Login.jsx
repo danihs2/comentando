@@ -7,7 +7,7 @@ function Login () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
-    //const [ loggedIn, setGlobalLoggedIn ] = useGlobalContext();
+    const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
