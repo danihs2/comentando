@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const setGlobalLoggedIn = (value) => {
         setLoggedIn(value);

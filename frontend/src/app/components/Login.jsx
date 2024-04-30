@@ -1,6 +1,6 @@
 "use client";
 //import { cookies } from "next/headers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../providers/GlobalContext";
 
 function Login () {
@@ -8,6 +8,25 @@ function Login () {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
+
+    useEffect(() => {
+        console.log("Use Effect - loggedIn: ", loggedIn);
+        let cookieValue = document.cookie;
+        cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+        console.log("CookieValue: ", cookieValue);
+        if (cookieValue) {
+            setGlobalLoggedIn(true);
+        }else{
+            setGlobalLoggedIn(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("Use Effect - loggedIn: ", loggedIn);
+        if (loggedIn) {
+            window.location.href = '/';
+        }
+    }, [loggedIn]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,30 +40,17 @@ function Login () {
                 body: JSON.stringify({ username, password }),
             });
             data = await data.json();
-            //data.detail?? console.error(data.detail);
-            //console.log(data.detail);
-            if (data.detail == "No User matches the given query.") {
+            console.log(data);
+            if (data.detail === "No User matches the given query.") {
                 window.alert("Usuario no encontrado");
-            } else {
-                window.alert("Usuario encontrado");
+            } else if (data.token) { // Si hay un token en la respuesta
                 console.log(data)
-                //Guardar en el local storage data.token
-                localStorage.setItem('token', data.token);
-                // imprimir el token recuperado del local storage
-                console.log(localStorage.getItem('token'));
-
-                /*let cookieValue = document.cookie;
-                if(cookieValue != null){
-                    cookieValue = document.cookie
-                    .split('; ')
-                    .find(row => row.startsWith('token='))
-                    .split('=')[1];
-                    console.log("CookieValue: " + cookieValue);
-                }*/
-                //cookies.set('token', data.token, { expires, httpOnly: true });
-                //setGlobalLoggedIn(true);
-                //console.log("GlobalLogin: ", globalLogin);
-                //console.log(cookies.get('token'));
+                setGlobalLoggedIn(true);
+                window.alert("Usuario encontrado");
+                document.cookie = `token=${data.token}`;
+                console.log("Cookie: ", document.cookie);
+            } else {
+                window.alert("Error en la autenticación: " + data.detail);
             }
         } catch (error) {
             console.error(error);

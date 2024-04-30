@@ -22,11 +22,12 @@ const detallep = () => {
   const [ourMovieData, setOurMovieData] = useState({})
   const [loading, setLoading] = useState(true)
   const [comentarios, setComentarios] = useState(null);
+  let movieId = searchParams.get('movieId');
 
   useEffect(() => {
     const url = `${pathname}?${searchParams}`
     // expected output: "/detalle?movieId=1"
-    var movieId = searchParams.get('movieId')
+    movieId = searchParams.get('movieId')
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=es-MX`)
     .then(response => response.json())
     .then(data => {
@@ -101,7 +102,7 @@ const detallep = () => {
           </div>
         </div>
         <div className="flex-1">
-          <MyCommentSection />
+          <MyCommentSection pelicula_tmdb_id = { movieId } />
         </div>
       </div>
       <div className="px-10 pb-10">

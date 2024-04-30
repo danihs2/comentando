@@ -1,5 +1,28 @@
+"use client";
+import { useState } from "react";
 
 function CommentCard(comment) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleEdit = () => {
+    // Lógica para editar el comentario
+    console.log("Editar comentario:", comment.id);
+  };
+
+  const handleDelete = () => {
+    // Lógica para eliminar el comentario
+    console.log("Eliminar comentario:", comment.id);
+  };
+
+  const handleReport = () => {
+    // Lógica para reportar el comentario
+    console.log("Reportar comentario:", comment.id);
+  };
+
   return (
     <>
         <article className="p-6 text-base bg-white rounded-tl-lg rounded-tr-lg rounded-bl-lg dark:bg-gray-900">
@@ -13,31 +36,32 @@ function CommentCard(comment) {
                     <p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-02-08"
                             title="February 8th, 2022">Feb. 8, 2022</time></p>
                 </div>
-                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                    className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    type="button">
-                    <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                    </svg>
-                    <span className="sr-only">Comment settings</span>
-                </button>
-                <div id="dropdownComment1"
-                    className="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconHorizontalButton">
-                        <li>
-                            <a href="#"
-                                className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                        </li>
-                    </ul>
+                <div className="relative">
+                    <button onClick={toggleMenu} id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                        className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        type="button">
+                        <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                        </svg>
+                        <span className="sr-only">Comment settings</span>
+                    </button>
+                    {menuOpen && (
+                        <div id="dropdownComment1"
+                            className="absolute z-10 right-0 mt-2 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdownMenuIconHorizontalButton">
+                                <li>
+                                    <button onClick={handleEdit} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
+                                </li>
+                                <li>
+                                    <button onClick={handleDelete} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</button>
+                                </li>
+                                <li>
+                                    <button onClick={handleReport} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</button>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </footer>
             <p className="text-gray-500 dark:text-gray-400">{comment.comentario}</p>

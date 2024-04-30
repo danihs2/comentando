@@ -16,6 +16,8 @@ from django.contrib.auth.models import User
 
 from decimal import Decimal
 
+from django.http import HttpResponse
+
 @api_view(['POST'])
 def login(request):
     print(request.data)
@@ -26,7 +28,10 @@ def login(request):
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
 
-    return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_200_OK)
+    # Crear la respuesta con la cookie
+    response = Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_200_OK)
+    response.set_cookie('token', token.key, max_age=3600, path='/')  # Establecer la cookie
+    return response
 
 @api_view(['POST'])
 def register(request):

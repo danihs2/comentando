@@ -16,6 +16,7 @@ function CommentSection(props) {
         <div className=" mb-3" key={"contenedor-"+comment.id}>
           <CommentCard
             key={comment.id}
+            id={comment.id}
             nombre={comment.nombre_usuario}
             comentario={comment.contenido}
             score={comment.score}
