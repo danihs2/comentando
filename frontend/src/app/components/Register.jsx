@@ -1,31 +1,52 @@
 "use client";
 import { useState } from "react";
+import { useGlobalContext } from "../providers/GlobalContext";
 
 function Register() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password, name);
+        console.log(email, password, username);
+        // Lógica para registrar un nuevo usuario
+       const data = await fetch(`${process.env.NEXT_PUBLIC_OUR_API_URL}/api/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password, username }),
+        });
+        const response = await data.json();
+        console.log(response);
+        if (response.token) {
+            console.log(response);
+            setGlobalLoggedIn(true);
+            document.cookie = `token=${response.token}`;
+            document.cookie = `username=${response.username}`;
+            window.location.href = '/';
+        } else {
+            window.alert("Error en la autenticación: " + response.username);
+        }
     }
 
     return (
         <div className="flex items-center justify-center">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                        Name
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                        Username
                     </label>
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="name"
+                        id="username"
                         type="text"
-                        placeholder="Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        placeholder="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
                 <div className="mb-4">

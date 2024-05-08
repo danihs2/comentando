@@ -48,6 +48,7 @@ function Login () {
                 setGlobalLoggedIn(true);
                 window.alert("Usuario encontrado");
                 document.cookie = `token=${data.token}`;
+                document.cookie = `username=${data.username}`;
                 console.log("Cookie: ", document.cookie);
             } else {
                 window.alert("Error en la autenticación: " + data.detail);

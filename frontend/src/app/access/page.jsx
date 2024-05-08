@@ -1,10 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import { useGlobalContext } from "../providers/GlobalContext";
 
 function Acces() {
     const [isLogin, setIsLogin] = useState(true);
+    const { loggedIn, setGlobalLoggedIn } = useGlobalContext();
+
+    useEffect(() => {
+        console.log("Use Effect - loggedIn: ", loggedIn);
+        let cookieValue = document.cookie;
+        cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+        console.log("CookieValue: ", cookieValue);
+        if (cookieValue) {
+            setGlobalLoggedIn(true);
+            window.location.href = '/';
+        }else{
+            setGlobalLoggedIn(false);
+        }
+    }, []);
 
     const handleLoginClick = () => {
         setIsLogin(true);

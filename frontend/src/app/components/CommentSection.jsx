@@ -5,7 +5,7 @@ import ReplieCard from "./ReplieCard";
 function CommentSection(props) {
 
  useEffect(() => {
-    console.log("aa", props.comentarios);
+    //console.log("aa", props.comentarios);
   }, []);
 
   return (

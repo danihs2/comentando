@@ -38,6 +38,7 @@ const detallep = () => {
     const fetchData = async () => {
       const data = await getComments(movieId);
       setComentarios(data);
+      setOurMovieData(data.pelicula);
       setLoading(false);
     };
 
@@ -99,10 +100,16 @@ const detallep = () => {
                 ))}
               </div>
             </div>
+            <div className="flex flex-col">
+              <span className="font-semibold">Score:</span>
+              <div className="flex flex-wrap">
+                <span className="bg-gray-200 text-gray-800 rounded-full px-2 py-1 text-sm mr-2 mb-2">Numero de calificaciones: { ourMovieData?.num_calificaciones? ourMovieData.num_calificaciones : "0" } - Score: <strong className='text-yellow-600'>&#9733;{ourMovieData?.score? ourMovieData.score : "0"}</strong></span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex-1">
-          <MyCommentSection pelicula_tmdb_id = { movieId } />
+          <MyCommentSection pelicula_tmdb_id = { movieId } esActualizacion={false} />
         </div>
       </div>
       <div className="px-10 pb-10">
