@@ -6,7 +6,7 @@ function Footer () {
     <div
         className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
         <div className="me-12 hidden lg:block">
-        <span>Get connected with us on social networks:</span>
+        <span>Nuestras redes:</span>
         </div>
         <div className="flex justify-center">
         <a href="#!" className="me-6 [&>svg]:h-4 [&>svg]:w-4">
@@ -64,7 +64,7 @@ function Footer () {
             </svg>
         </a>
         </div>
-    </div>
+    </div>{/* End of social networks }
     <div className="mx-6 py-10 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div className="">
@@ -79,12 +79,10 @@ function Footer () {
                     d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                 </svg>
             </span>
-            TW Elements
+            Uso del proyecto
             </h6>
             <p>
-            Here you can use rows and columns to organize your footer
-            content. Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit.
+            Proyecto escolar, puedes utilizar este proyecto para cualquier cosa que quierashacer c:
             </p>
         </div>
         <div>
@@ -186,8 +184,9 @@ function Footer () {
         </div>
         </div>
     </div>
+    { End of contact */}
     <div className="bg-black/5 p-6 text-center">
-        <span>© 2023 Copyright: </span>
+        <span>© 2024 Copyright: </span>
         <a className="font-semibold" href="#!">
             BUAPOS DE LA BUAP
         </a>

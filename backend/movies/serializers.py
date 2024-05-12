@@ -8,9 +8,11 @@ class PeliculaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ComentarioSerializer(serializers.ModelSerializer):
+    nombre_usuario = serializers.CharField(read_only=True)
+
     class Meta:
         model = Comentario
-        fields = '__all__'
+        fields = ['id', 'contenido', 'score', 'nombre_usuario']
 
 class ReplieSerializer(serializers.ModelSerializer):
     class Meta:
