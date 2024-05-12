@@ -17,6 +17,9 @@ class Comentario(models.Model):
     contenido = models.TextField()
     score = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
 
+    def nombre_usuario(self):
+        return self.usuario.username
+
 class Replie(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE)
