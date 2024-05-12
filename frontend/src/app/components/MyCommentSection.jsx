@@ -50,7 +50,7 @@ export default function MyCommentSection( { pelicula_tmdb_id, esActualizacion, c
             const score = document.querySelector('input[name="score"]:checked').value;
             const contenido = document.querySelector('textarea').value;
             console.log("Data a enviar: ", score, contenido, esActualizacion);
-            return
+            //return
             if(score === 0 || contenido === "") {
                 window.alert("Por favor selecciona un numero de score y escribe un contenido");
                 return;
