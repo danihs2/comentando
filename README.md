@@ -24,6 +24,28 @@ Comentando Películas es una aplicación web que permite a los usuarios comentar
 1. Clona este repositorio en tu máquina local.
 2. Instala las dependencias del frontend y el backend.
 
+## Backend
+En la carpeta del back:
+1. Crear un nuevo entorno virtual:
+```
+python -m venv nombre_del_entorno
+```
+2. Activar el entorno virtual:
+```
+.nombre_del_entorno\Scripts\activate
+```
+3. Instalar las dependencias:
+```
+pip install -r requirements.txt
+```
+4. Ejecutalo con
+```
+python manage.py runserver
+```
+
+## Frontend
+En la carpeta del b
+
 
 ### Ejecución
 
