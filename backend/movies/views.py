@@ -86,6 +86,8 @@ def eliminar_comentario(request, comentario_id):
         pelicula.num_calificaciones -= 1
         if pelicula.num_calificaciones > 0:
             pelicula.score = pelicula.score / pelicula.num_calificaciones
+        else:
+            pelicula.score = 0
         pelicula.save()
         return Response({'mensaje': 'Comentario eliminado exitosamente'}, status=status.HTTP_200_OK)
     except Comentario.DoesNotExist:
@@ -112,7 +114,10 @@ def editar_comentario(request, comentario_id):
         pelicula.score = 0
         for calificacion in calificaciones:
             pelicula.score += calificacion.score
-        pelicula.score = pelicula.score / pelicula.num_calificaciones
+        if pelicula.num_calificaciones > 0:
+            pelicula.score = pelicula.score / pelicula.num_calificaciones
+        else:
+            pelicula.score = 0
         pelicula.save()
         return Response({'mensaje': 'Comentario editado exitosamente'}, status=status.HTTP_200_OK)
     except Comentario.DoesNotExist:
