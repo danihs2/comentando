@@ -44,10 +44,12 @@ python manage.py runserver
 ```
 
 ## Frontend
-En la carpeta del b
-
-
-### Ejecución
-
-1. Ejecuta el servidor de desarrollo del frontend y el backend.
-
+En la carpeta del Front:
+1. Instala dependencias:
+```
+npm i
+```
+2. Ejecutalo:
+```
+npm run dev
+```
