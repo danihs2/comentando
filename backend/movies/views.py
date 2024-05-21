@@ -86,9 +86,12 @@ def eliminar_comentario(request, comentario_id):
         pelicula.num_calificaciones -= 1
         if pelicula.num_calificaciones > 0:
             pelicula.score = pelicula.score / pelicula.num_calificaciones
+            pelicula.save()
         else:
             pelicula.score = 0
-        pelicula.save()
+            # Se elimina la pelicula si no tiene comentarios
+            pelicula.delete()
+        
         return Response({'mensaje': 'Comentario eliminado exitosamente'}, status=status.HTTP_200_OK)
     except Comentario.DoesNotExist:
         # Si el comentario no existe, devuelve un mensaje de error
@@ -110,10 +113,13 @@ def editar_comentario(request, comentario_id):
         comentario.save()
         # Tambien actualizamos el score de la pelicula
         pelicula = comentario.pelicula
+        #pelicula.num_calificaciones = 1
+        print(pelicula.num_calificaciones)
         calificaciones = Comentario.objects.filter(pelicula=pelicula)
         pelicula.score = 0
         for calificacion in calificaciones:
             pelicula.score += calificacion.score
+        print(pelicula.num_calificaciones)
         if pelicula.num_calificaciones > 0:
             pelicula.score = pelicula.score / pelicula.num_calificaciones
         else:
@@ -152,11 +158,13 @@ def comentario(request):
         pelicula.score = 0
         for comentario in comentarios:
             pelicula.score += comentario.score
+        pelicula.score += score_float
         pelicula.score /= pelicula.num_calificaciones
         pelicula.save()
     else:
         # Si la película es nueva, el puntaje será el puntaje enviado en la solicitud
         pelicula.score = Decimal(score)
+        pelicula.num_calificaciones = 1
         pelicula.save()
 
     # Crear el comentario

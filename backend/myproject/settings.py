@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'movies',
+    'movies', #aplicacion
 ]
 
 MIDDLEWARE = [
@@ -137,6 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3000", # Quienes te pueden hacer peticiones
     "http://127.0.0.1:3000",
 ]

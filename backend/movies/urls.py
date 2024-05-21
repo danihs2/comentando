@@ -6,7 +6,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    re_path(r'comentario/(?P<comentario_id>\d+)/eliminar/', views.eliminar_comentario, name='eliminar_comentario'),
+    re_path(r'comentario/(?P<comentario_id>\d+)/eliminar/', views.eliminar_comentario, name='eliminar_comentario'), # Enviar parametros
     re_path(r'comentario/(?P<comentario_id>\d+)/editar/', views.editar_comentario, name='editar_comentario'),
     re_path('login', views.login),
     re_path('register', views.register),
